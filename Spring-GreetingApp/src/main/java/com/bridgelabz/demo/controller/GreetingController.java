@@ -70,4 +70,15 @@ public class GreetingController {
         }
     }
     
+    //UseCase: 8
+    @DeleteMapping("/greeting/{id}")
+    public String deleteGreeting(@PathVariable Long id) {
+        boolean deleted = greetingService.deleteGreeting(id);
+        if(deleted){
+            return "Greeting deleted successfully";
+        }else{
+            return "Greeting not found";
+        }
+    }
+    
 }
