@@ -3,6 +3,7 @@ import com.bridgelabz.demo.model.Greeting;
 import com.bridgelabz.demo.service.GreetingService;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +51,11 @@ public class GreetingController {
         } else {
             return "Greeting not found";
         }
+    }
+    
+    //UseCase: 6
+    @GetMapping("/greeting/all")
+    public List<Greeting> getAllGreetings(){
+        return greetingService.getAllGreeting();
     }
 }

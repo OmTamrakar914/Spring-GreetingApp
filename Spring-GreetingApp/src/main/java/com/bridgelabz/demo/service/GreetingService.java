@@ -5,6 +5,7 @@ import com.bridgelabz.demo.model.Greeting;
 import com.bridgelabz.demo.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class GreetingService {
@@ -37,5 +38,9 @@ public class GreetingService {
 
     public Optional<Greeting> findGreetingById(long id){
         return greetingRepository.findById(id);
+    }
+    
+    public List<Greeting> getAllGreeting(){
+        return greetingRepository.findAll();
     }
 }
