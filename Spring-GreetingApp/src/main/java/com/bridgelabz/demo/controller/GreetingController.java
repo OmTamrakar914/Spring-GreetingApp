@@ -1,18 +1,18 @@
 package com.bridgelabz.demo.controller;
-
+import com.bridgelabz.demo.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.bridgelabz.demo.service.GreetingService;
 
 @RestController
 public class GreetingController {
+
     @Autowired
-	private GreetingService greetingService;
-    
+    private GreetingService greetingService;
+
     @GetMapping("/greeting")
     public String getGreeting(){
-        return "GET : " + greetingService.getGreeting() ;
+        return "GET : " + greetingService.getGreeting();
     }
 
     @PostMapping("/greeting")
@@ -29,11 +29,11 @@ public class GreetingController {
     public String deleteGreeting(){
         return "DELETE : " + greetingService.getGreeting();
     }
-    
-  //UseCase: 3
+
+    //UseCase: 3
     @GetMapping("/greeting/params")
     public String getGreetingParams(@RequestParam(value = "firstName",required = false) String firstName,
                                     @RequestParam(value = "lastName",required = false) String lastName){
-        return greetingService.displayingGreeting(firstName,lastName);
+        return greetingService.getGreeting(firstName,lastName);
     }
 }

@@ -1,24 +1,36 @@
 package com.bridgelabz.demo.service;
 import org.springframework.stereotype.Service;
 
+import com.bridgelabz.demo.model.Greeting;
+import com.bridgelabz.demo.repository.GreetingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Service
 public class GreetingService {
     public String getGreeting(){
         return "Hello world";
     }
-    
-    //UseCase: 3
-    public String displayingGreeting(String firstName,String lastName){
-        if(firstName != null && lastName != null){
-            return "Hello " + firstName + " " + lastName;
+
+    @Autowired
+    private GreetingRepository greetingRepository;
+
+    public String getGreeting(String firstName, String lastName) {
+        String message;
+        if (firstName != null && lastName != null) {
+            message = "Hello " + firstName + " " + lastName;
+        } else if (firstName != null) {
+            message = "Hello " + firstName;
+        } else if (lastName != null) {
+            message = "Hello " + lastName;
+        } else {
+            message = "Hello World";
         }
-        if(firstName != null){
-            return "Hello " + firstName;
-        }
-        if(lastName != null){
-            return "Hello " + lastName;
-        }else{
-            return "Hello World";
-        }
+        saveGreeting(message);
+        return message;
+    }
+
+    public void saveGreeting(String message) {
+        Greeting greeting = new Greeting(message);
+        greetingRepository.save(greeting);
     }
 }
